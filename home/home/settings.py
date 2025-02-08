@@ -54,7 +54,7 @@ ROOT_URLCONF = 'home.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'], # Indicamos la ruta de las plantillas
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -62,7 +62,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'dashboard.apps.DashboardConfig',
+                # 'dashboard.apps.DashboardConfig',
             ],
         },
     },
@@ -116,7 +116,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = 'static/' # Indicamos la ruta de los archivos estaticos
+
+STATICFILES_DIRS = [ # Indicamos la ruta de los archivos estaticos
+    BASE_DIR/ "static"
+]
+
+STATIC_ROOT = (BASE_DIR / 'asert/') # Indicamos la ruta de los archivos estaticos
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
