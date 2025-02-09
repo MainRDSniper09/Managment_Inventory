@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'dashboard.apps.DashboardConfig', # Indicamos la ruta de la aplicacion
+    'user.apps.UserConfig', # Indicamos que podemos manipular los usuarios
+    'crispy_forms', # Usamos un diseño de registro 
+    'crispy_bootstrap4',
 ]
 
 MIDDLEWARE = [
@@ -63,7 +66,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                # 'dashboard.apps.DashboardConfig',
             ],
         },
     },
@@ -101,6 +103,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4' # Indicamos la plantilla
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
