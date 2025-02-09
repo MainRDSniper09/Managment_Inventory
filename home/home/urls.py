@@ -16,8 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include # Importamos include para incluir las rutas de las aplicaciones
+from user import views as user_view # Importamos las vistas de la aplicacion user
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-     path('', include('dashboard.urls')) # Ruta principal
+    path('', include('dashboard.urls')), # Ruta principal
+    path('register/', user_view.register, name='user-register'), # Ruta para el registro de usuarios
 ]
