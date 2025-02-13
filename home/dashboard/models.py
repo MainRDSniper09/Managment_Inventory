@@ -6,7 +6,7 @@ from django.contrib.auth.models import User # Importamos el modelo User
 # Create your models here.
 
 CATEGORY = (
-    ('Celulares', 'Celulares'),
+    ('Comp Electricos', 'Comp Electricos'),
     ('Computadores', 'Computadores'),
     ('Televisores', 'Televisores'),
 )
