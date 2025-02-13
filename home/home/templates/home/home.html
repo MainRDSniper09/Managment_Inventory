@@ -1,0 +1,123 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <!-- Panel de Control -->
+        <div class="col-md-3">
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h5 class="card-title">Panel de Control</h5>
+                </div>
+                <div class="card-body">
+                    <div class="list-group">
+                        <a href="{% url 'productos_lista' %}" class="list-group-item">
+                            <i class="fas fa-box"></i> Productos
+                        </a>
+                        <a href="{% url 'servicios_lista' %}" class="list-group-item">
+                            <i class="fas fa-wrench"></i> Servicios
+                        </a>
+                        <a href="{% url 'insumos_lista' %}" class="list-group-item">
+                            <i class="fas fa-box-open"></i> Insumos
+                        </a>
+                        <a href="{% url 'pedidos_lista' %}" class="list-group-item">
+                            <i class="fas fa-clipboard-list"></i> Pedidos
+                        </a>
+                        <a href="{% url 'cuadrillas_lista' %}" class="list-group-item">
+                            <i class="fas fa-users"></i> Cuadrillas
+                        </a>
+                        <a href="{% url 'notificaciones_lista' %}" class="list-group-item">
+                            <i class="fas fa-bell"></i> Notificaciones
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Notificaciones -->
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h5 class="card-title">Notificaciones Recientes</h5>
+                </div>
+                <div class="card-body">
+                    {% if notificaciones %}
+                        {% for notificacion in notificaciones %}
+                            <div class="alert alert-info">
+                                {{ notificacion.mensaje }}
+                                <small>{{ notificacion.fecha }}</small>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>No hay notificaciones nuevas</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Contenido Principal -->
+        <div class="col-md-9">
+            <!-- Resumen de Actividad -->
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h5 class="card-title">Pedidos Pendientes</h5>
+                        </div>
+                        <div class="card-body">
+                            <h3>{{ pedidos_pendientes|length }}</h3>
+                            <p>Pedidos en proceso</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h5 class="card-title">Insumos Bajo Stock</h5>
+                        </div>
+                        <div class="card-body">
+                            <h3>{{ insumos_bajo_stock|length }}</h3>
+                            <p>Insumos por reponer</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h5 class="card-title">Cuadrillas</h5>
+                        </div>
+                        <div class="card-body">
+                            <h3>{{ cuadrillas_usuario|length }}</h3>
+                            <p>Cuadrillas asignadas</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contenido Dinámico -->
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h5 class="card-title">Productos Recientes</h5>
+                </div>
+                <div class="card-body">
+                    {% if productos_recientes %}
+                        <div class="row">
+                            {% for producto in productos_recientes %}
+                                <div class="col-md-4">
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <h5>{{ producto.nombre }}</h5>
+                                            <p>{{ producto.descripcion }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p>No hay productos recientes</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

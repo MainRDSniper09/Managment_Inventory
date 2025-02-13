@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}Registro{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center">Registro</h3>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="{{ form.username.id_for_label }}">Nombre de Usuario</label>
+                            <input type="text" class="form-control" id="{{ form.username.id_for_label }}" name="{{ form.username.html_name }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="{{ form.first_name.id_for_label }}">Nombre</label>
+                            <input type="text" class="form-control" id="{{ form.first_name.id_for_label }}" name="{{ form.first_name.html_name }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="{{ form.last_name.id_for_label }}">Apellido</label>
+                            <input type="text" class="form-control" id="{{ form.last_name.id_for_label }}" name="{{ form.last_name.html_name }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="{{ form.email.id_for_label }}">Correo Electrónico</label>
+                            <input type="email" class="form-control" id="{{ form.email.id_for_label }}" name="{{ form.email.html_name }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="{{ form.tipo_usuario.id_for_label }}">Tipo de Usuario</label>
+                            <select class="form-control" id="{{ form.tipo_usuario.id_for_label }}" name="{{ form.tipo_usuario.html_name }}" required>
+                                {% for value, label in form.tipo_usuario.field.choices %}
+                                    <option value="{{ value }}">{{ label }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="{{ form.password1.id_for_label }}">Contraseña</label>
+                            <input type="password" class="form-control" id="{{ form.password1.id_for_label }}" name="{{ form.password1.html_name }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="{{ form.password2.id_for_label }}">Confirmar Contraseña</label>
+                            <input type="password" class="form-control" id="{{ form.password2.id_for_label }}" name="{{ form.password2.html_name }}" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Registrarse</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
