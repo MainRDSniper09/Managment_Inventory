@@ -1,7 +1,8 @@
  <!--Navbar-->
  <nav class="navbar navbar-expand-lg navbar-info bg-info">
+    {% if user.is_authenticated %}
     <div class="container">
-        <a class="navbar-brand text-white" href="{% url 'dashboard-index' %}">KenInventory</a>
+        <a class="navbar-brand text-white" href="{% url 'dashboard-index' %}">ElectroSas</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -16,14 +17,24 @@
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link text-white" href="profile.html">Admin Profile <span
+                    <a class="nav-link text-white" href="{%  url 'user-profile' %}">Perfil <span
                             class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="#">Logout</a>
+                    <a class="nav-link text-white" href="{% url 'user-logout' %}">Cerrar Sesion</a>
                 </li>
             </ul>
-
+            {% else %}
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link text-white" href="{% url 'user-register' %}">Registarse <span
+                            class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{% url 'user-login' %}">Iniciar Sesion</a>
+                </li>
+            </ul>
+            {% endif %}
         </div>
     </div>
 </nav>

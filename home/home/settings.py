@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -127,6 +128,14 @@ STATICFILES_DIRS = [ # Indicamos la ruta de los archivos estaticos
 ]
 
 STATIC_ROOT = (BASE_DIR / 'asert/') # Indicamos la ruta de los archivos estaticos
+
+LOGIN_REDIRECT_URL = 'dashboard-index'
+LOGIN_URL = 'user-login'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR / 'media')
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
