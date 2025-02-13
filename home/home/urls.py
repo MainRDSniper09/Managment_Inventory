@@ -26,7 +26,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('dashboard/', include('dashboard.urls')), # Ruta principal
     path('register/', user_view.register, name='user-register'), # Ruta para el registro de usuarios
-     path('profile/', user_view.profile, name='user-profile'), # Ruta para el registro de usuarios
+    path('profile/', user_view.profile, name='user-profile'), # Ruta para el registro de usuarios
     path('', auth_views.LoginView.as_view(template_name='user/login.html'),name='user-login'), # Creamos la ruta de login
     # TODO encontrar el porque no muestra pagina logout.html
     path('logout/', auth_views.LogoutView.as_view(template_name='user/logout.html'), name='user-logout'), # Creamos pagina de deslogeo
