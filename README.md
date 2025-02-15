@@ -11,8 +11,8 @@ Managment_Inventory es un sistema de gestión de inventario desarrollado en **Py
 ## 🚀 Tecnologías utilizadas  
 **Backend:** Django  
 **Frontend:** HTML, CSS, JavaScript (Bootstrap)  
-**Base de datos:** SQLite / PostgreSQL  
-**Gráficos:** Matplotlib / Chart.js  
+**Base de datos:** SQLite   
+**Gráficos:** Bootstrap 
 
 ## 📌 Instalación  
 ```bash
