@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+<<<<<<< HEAD
+=======
+import os
+>>>>>>> Niko_Develoment
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,6 +41,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+<<<<<<< HEAD
+=======
+    'dashboard.apps.DashboardConfig', # Indicamos la ruta de la aplicacion
+    'user.apps.UserConfig', # Indicamos que podemos manipular los usuarios
+    'crispy_forms', # Usamos un diseño de registro 
+    'crispy_bootstrap4',
+>>>>>>> Niko_Develoment
 ]
 
 MIDDLEWARE = [
@@ -54,7 +65,11 @@ ROOT_URLCONF = 'home.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+<<<<<<< HEAD
         'DIRS': [],
+=======
+        'DIRS': [BASE_DIR / 'templates'], # Indicamos la ruta de las plantillas
+>>>>>>> Niko_Develoment
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -99,6 +114,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+<<<<<<< HEAD
+=======
+CRISPY_TEMPLATE_PACK = 'bootstrap4' # Indicamos la plantilla
+>>>>>>> Niko_Develoment
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
@@ -115,7 +134,25 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
+<<<<<<< HEAD
 STATIC_URL = 'static/'
+=======
+STATIC_URL = 'static/' # Indicamos la ruta de los archivos estaticos
+
+STATICFILES_DIRS = [ # Indicamos la ruta de los archivos estaticos
+    BASE_DIR/ "static"
+]
+
+STATIC_ROOT = (BASE_DIR / 'asert/') # Indicamos la ruta de los archivos estaticos
+
+LOGIN_REDIRECT_URL = 'dashboard-index'
+LOGIN_URL = 'user-login'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR / 'media')
+
+
+>>>>>>> Niko_Develoment
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
