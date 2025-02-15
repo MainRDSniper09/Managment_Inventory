@@ -1,19 +1,20 @@
 {% extends 'partials/base.html' %}
-{% block title %}Cerrar Sesión{% endblock %}
+{% block title %}Logout Page{% endblock %}
+{% load crispy_forms_tags %}
 
 {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col-md-6 offset-md-3">
-            <div class="border bg-white p-3 text-center">
-                <h3>Sesión Cerrada</h3>
-                <hr>
-                <div class="alert alert-danger">
-                    <h4>Has cerrado sesión correctamente.</h4>
-                </div>
-                <a href="{% url 'user-login' %}" class="btn btn-primary">Iniciar sesión</a>
+<div class="row my-4">
+    <div class="col-md-6 offset-md-3">
+        <div class="border p-3 bg-white">
+            <h4>Logout Page</h4>
+            <hr>
+            <div class="alert alert-info">
+                <h5>You have been logged out</h5>
             </div>
+            <a href="{% url 'user-login' %}">Login</a>
         </div>
     </div>
 </div>
+
+
 {% endblock %}
