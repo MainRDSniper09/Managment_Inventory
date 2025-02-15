@@ -1,0 +1,26 @@
+{% extends 'partials/base.html' %}
+{% block tittle %} Orden {% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-6 offset-md-3">
+            <div class="border">
+                <div class="border bg-white p-3">
+                    <h3>Borrar producto</h3>
+                    <hr>
+                    <div class="alert alert-danger">
+                        <h4>¿Estas seguro que quieres borrar este producto?</h4>
+                    </div>
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{form}}
+                        <a class="btn btn-secondary" href="{% url 'dashboard-product' %}">Cancelar</a>
+                        <input type="submit" class="btn btn-danger" value="Confirm">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
