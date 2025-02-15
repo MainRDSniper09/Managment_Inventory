@@ -8,7 +8,7 @@ class Profile(models.Model):
     staff = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     direccion = models.CharField(max_length=200, null=True)
     telefono = models.CharField(max_length=20, null=True)
-    imagen = models.ImageField(default='avatar.jpg', upload_to='Profile_Imagenes')
+    imagen = models.ImageField(default='avatar.jpg', upload_to='Profile_Images')
 
     def __str__(self):
         return f'{self.staff.username}-Perfil'
