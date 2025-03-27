@@ -1,8 +1,26 @@
-body{
-    background: rgb(230, 227, 227);
+body {
+    background: linear-gradient(to bottom, #87CEEB, #FFD700, #FFA500);
+    /* Azul cielo -> Dorado (arena) -> Naranja (atardecer) */
+    font-family: 'Arial', sans-serif;
+    color: #333;
 }
 
-.my-card:hover{
+/* Estilo para los contenedores de los gráficos */
+.bg-white {
+    background: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente */
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Asegurar que los gráficos tienen márgenes adecuados */
+canvas {
+    display: block;
+    margin: auto;
+}
+
+/* Efecto hover en tarjetas */
+.my-card:hover {
     transform: scale(1.1);
     transition: 0.2s ease-in-out;
 }
