@@ -15,13 +15,6 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-<<<<<<< HEAD
-from django.urls import path
-
-urlpatterns = [
-    path('admin/', admin.site.urls),
-]
-=======
 from django.urls import path, include # Importamos include para incluir las rutas de las aplicaciones
 from user import views as user_view # Importamos las vistas de la aplicacion user
 from django.contrib.auth import views as auth_views # Importamos la autenticacion
@@ -39,4 +32,3 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(template_name='user/logout.html'), name='user-logout'), # Creamos pagina de deslogeo
     
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
->>>>>>> Niko_Develoment
