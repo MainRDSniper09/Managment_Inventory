@@ -1,5 +1,5 @@
 {% extends 'partials/base.html' %}
-{% block tittle %} Orden {% endblock %}
+{% block tittle %} Reserva {% endblock %}
 
 {% block content %}
 <div class="container">
@@ -7,10 +7,10 @@
         <div class="col-md-6 offset-md-3">
             <div class="border">
                 <div class="border bg-white p-3">
-                    <h3>Borrar producto</h3>
+                    <h3>Eliminar Reserva</h3>
                     <hr>
                     <div class="alert alert-danger">
-                        <h4>¿Estas seguro que quieres borrar este producto?</h4>
+                        <h4>¿Estas seguro que quieres eliminar esta reserva?</h4>
                     </div>
                     <form method="POST">
                         {% csrf_token %}

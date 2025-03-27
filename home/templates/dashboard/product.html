@@ -1,5 +1,5 @@
 {% extends 'partials/base.html' %}
-{% block tittle %} Productos {% endblock %}
+{% block tittle %} Reserva {% endblock %}
 {% load crispy_forms_tags %}
 
 {% block content %}
@@ -17,7 +17,7 @@
                 {% endif %}
                 {% endfor %}
                 <div class="border bg-white p-3">
-                    <h4>Añadir Productos</h4>
+                    <h4>Añadir Reserva</h4>
                     <hr>
                     <form method="POST">
                         {% csrf_token %}
@@ -32,7 +32,7 @@
                     <thead class="bg-info">
                         <tr class="text-white">
                             <th scope="col">#</th>
-                            <th scope="col">Nombre</th>
+                            <th scope="col">Habitacion</th>
                             <th scope="col">Categoria</th>
                             <th scope="col">Cantidad</th>
                         </tr>
