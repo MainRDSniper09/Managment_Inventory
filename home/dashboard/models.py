@@ -6,9 +6,7 @@ from django.contrib.auth.models import User # Importamos el modelo User
 # Create your models here.
 
 CATEGORY = (
-    ('Comp Electricos', 'Comp Electricos'),
-    ('Computadores', 'Computadores'),
-    ('Televisores', 'Televisores'),
+    ('Habitaciones', 'Habitaciones'),
 )
 
 class Product(models.Model):
