@@ -16,11 +16,13 @@ click==8.1.8
 colorama==0.4.6
 command_runner==1.7.0
 coverage==7.6.12
+crispy-bootstrap4==2024.10
 cryptography==44.0.1
 cyclonedx-bom==5.3.0
 cyclonedx-python-lib==9.0.2
 defusedxml==0.7.1
 Django==5.1.6
+django-crispy-forms==2.3
 dnspython==2.7.0
 docutils==0.21.2
 EditorConfig==0.17.0
@@ -36,6 +38,7 @@ httpcore==1.0.7
 httptools==0.6.4
 httpx==0.28.1
 idna==3.10
+iniconfig==2.1.0
 isoduration==20.11.0
 isort==6.0.1
 itsdangerous==2.2.0
@@ -62,6 +65,7 @@ pillow==11.1.0
 pip-requirements-parser==32.0.1
 pipdeptree==2.25.0
 platformdirs==4.3.6
+pluggy==1.5.0
 psutil==7.0.0
 py-serializable==2.0.0
 PyAutoGUI==0.9.54
@@ -84,6 +88,8 @@ PyQt6-WebEngine-Qt6==6.8.2
 PyQt6_sip==13.10.0
 PyRect==0.2.0
 PyScreeze==1.0.1
+pytest==8.3.5
+pytest-django==4.10.0
 python-dateutil==2.9.0.post0
 python-dotenv==1.0.1
 python-multipart==0.0.20
