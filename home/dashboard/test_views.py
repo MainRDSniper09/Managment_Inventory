@@ -69,3 +69,12 @@ def test_order_view(client_logged_in):
     response = client_logged_in.get(reverse('dashboard-order'))
     assert response.status_code == 200
     assert 'orders' in response.context  # Verifica que la plantilla recibe 'orders'
+
+
+@pytest.mark.django_db
+def test_client_portal_view(client_logged_in):
+    """Prueba para verificar que la zona de clientes carga correctamente."""
+    response = client_logged_in.get(reverse('dashboard-client-portal'))
+    assert response.status_code == 200
+    assert 'hotels' in response.context
+    assert 'reservation_form' in response.context
