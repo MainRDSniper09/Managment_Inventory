@@ -1,0 +1,153 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block tittle %}Zona de clientes{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Cerrar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div class="row">
+        <div class="col-lg-8 mb-4">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <h2 class="h4 mb-3">Explora nuestros hoteles</h2>
+                    <form method="get" class="form-row align-items-end">
+                        <div class="form-group col-md-5">
+                            <label for="id_search" class="form-label">Nombre</label>
+                            {{ filter_form.search }}
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label for="id_city" class="form-label">Ciudad o país</label>
+                            {{ filter_form.city }}
+                        </div>
+                        <div class="form-group col-md-2">
+                            <button type="submit" class="btn btn-primary btn-block mt-4 mt-md-0">Filtrar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            {% if hotels %}
+                <div class="row">
+                    {% for hotel in hotels %}
+                        <div class="col-md-6 mb-4">
+                            <div class="card h-100 shadow-sm">
+                                {% if hotel.image %}
+                                    <img src="{{ hotel.image.url }}" class="card-img-top" alt="Imagen de {{ hotel.name }}">
+                                {% else %}
+                                    <div class="bg-light d-flex align-items-center justify-content-center" style="height: 180px;">
+                                        <i class="fas fa-hotel fa-3x text-secondary"></i>
+                                    </div>
+                                {% endif %}
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="card-title">{{ hotel.name }}</h5>
+                                    <p class="card-text mb-1 text-muted">
+                                        <i class="fas fa-map-marker-alt me-1"></i>{{ hotel.city }}, {{ hotel.country }}
+                                    </p>
+                                    {% if hotel.rating %}
+                                        <p class="card-text mb-1">
+                                            <i class="fas fa-star text-warning"></i>
+                                            {{ hotel.rating }} / 5
+                                        </p>
+                                    {% endif %}
+                                    <p class="card-text small flex-grow-1">{{ hotel.description|truncatewords:30 }}</p>
+                                    {% if hotel.amenities %}
+                                        <p class="card-text small text-muted">
+                                            <strong>Servicios:</strong> {{ hotel.amenities }}
+                                        </p>
+                                    {% endif %}
+                                    <div class="d-flex justify-content-between align-items-center mt-3">
+                                        <span class="fw-bold">${{ hotel.nightly_rate }} / noche</span>
+                                        <a href="?hotel={{ hotel.id }}" class="btn btn-outline-primary btn-sm">Reservar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="alert alert-info">No se encontraron hoteles con los filtros seleccionados.</div>
+            {% endif %}
+        </div>
+        <div class="col-lg-4 mb-4">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="h5 mb-0">Crear reservación</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post" novalidate>
+                        {% csrf_token %}
+                        {% if reservation_form.errors %}
+                            <div class="alert alert-danger">
+                                Por favor corrige los errores marcados para continuar.
+                            </div>
+                        {% endif %}
+                        <div class="form-group mb-3">
+                            <label for="id_hotel" class="form-label">Hotel</label>
+                            {{ reservation_form.hotel }}
+                            {{ reservation_form.hotel.errors }}
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="id_check_in" class="form-label">Fecha de entrada</label>
+                            {{ reservation_form.check_in }}
+                            {{ reservation_form.check_in.errors }}
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="id_check_out" class="form-label">Fecha de salida</label>
+                            {{ reservation_form.check_out }}
+                            {{ reservation_form.check_out.errors }}
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="id_guests" class="form-label">Huéspedes</label>
+                            {{ reservation_form.guests }}
+                            {{ reservation_form.guests.errors }}
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="id_special_requests" class="form-label">Solicitudes especiales</label>
+                            {{ reservation_form.special_requests }}
+                            {{ reservation_form.special_requests.errors }}
+                        </div>
+                        <button type="submit" class="btn btn-success btn-block">Confirmar reservación</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card shadow-sm">
+                <div class="card-header bg-light">
+                    <h2 class="h5 mb-0">Mis reservaciones</h2>
+                </div>
+                <div class="card-body">
+                    {% if user_reservations %}
+                        <ul class="list-group list-group-flush">
+                            {% for reservation in user_reservations %}
+                                <li class="list-group-item">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <strong>{{ reservation.hotel.name }}</strong><br>
+                                            <small>{{ reservation.check_in }} &rarr; {{ reservation.check_out }}</small><br>
+                                            <small>{{ reservation.guests }} huésped(es)</small>
+                                        </div>
+                                        <span class="badge {% if reservation.status == 'confirmed' %}badge-success{% elif reservation.status == 'cancelled' %}badge-danger{% else %}badge-warning text-dark{% endif %}">
+                                            {{ reservation.get_status_display }}
+                                        </span>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="text-muted mb-0">Todavía no tienes reservaciones registradas.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

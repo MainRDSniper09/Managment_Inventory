@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product,Order # Importamos el modelo Product y Order
+from .models import Product, Order, Hotel, Reservation # Importamos los modelos
 from django.contrib.auth.models import Group # Importamos el modelo Group
 
 admin.site.site_header = "Administracion" # Cambiamos el nombre del panel administrativo
@@ -12,5 +12,7 @@ class ProductAdmin(admin.ModelAdmin):
 
 admin.site.register(Product, ProductAdmin) # Registramos el modelo Product en nuestro panel administrativo
 admin.site.register(Order) # Registramos el modelo Order en nuestro panel administrativo
+admin.site.register(Hotel) # Registramos los hoteles disponibles
+admin.site.register(Reservation) # Registramos las reservaciones realizadas
 
 # admin.site.unregister(Group) # Desregistramos el modelo Group en nuestro panel administrativo

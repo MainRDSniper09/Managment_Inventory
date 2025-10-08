@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
-from .models import Product, Order
-from .forms import ProductForm, OrderForm
+from django.db.models import Q
+from .models import Product, Order, Hotel, Reservation
+from .forms import ProductForm, OrderForm, ReservationForm, HotelFilterForm
 from django.contrib.auth.models import User
 from django.contrib import messages
 
@@ -118,5 +118,52 @@ def order(request):
         'products_count': products_count,
     }
     return render(request, 'dashboard/order.html', context)
+
+
+@login_required
+def client_portal(request):
+    hotels = Hotel.objects.all()
+    filter_form = HotelFilterForm(request.GET or None)
+
+    if filter_form.is_valid():
+        search = filter_form.cleaned_data.get('search')
+        city = filter_form.cleaned_data.get('city')
+
+        if search:
+            hotels = hotels.filter(name__icontains=search)
+        if city:
+            hotels = hotels.filter(Q(city__icontains=city) | Q(country__icontains=city))
+
+    if request.method == 'POST':
+        reservation_form = ReservationForm(request.POST)
+        if reservation_form.is_valid():
+            reservation = reservation_form.save(commit=False)
+            reservation.user = request.user
+            reservation.save()
+            messages.success(
+                request,
+                'Tu reservación ha sido registrada. Recibirás un correo con la confirmación.',
+            )
+            return redirect('dashboard-client-portal')
+    else:
+        initial = {}
+        selected_hotel = request.GET.get('hotel')
+        if selected_hotel:
+            initial['hotel'] = selected_hotel
+        reservation_form = ReservationForm(initial=initial)
+
+    user_reservations = (
+        Reservation.objects.filter(user=request.user)
+        .select_related('hotel')
+        .order_by('-created_at')
+    )
+
+    context = {
+        'hotels': hotels,
+        'reservation_form': reservation_form,
+        'filter_form': filter_form,
+        'user_reservations': user_reservations,
+    }
+    return render(request, 'dashboard/client_portal.html', context)
 
 
